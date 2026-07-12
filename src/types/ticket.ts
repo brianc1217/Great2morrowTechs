@@ -1,3 +1,5 @@
+import type { Comment } from "./comment";
+
 export type TicketPriority =
   | "Low"
   | "Medium"
@@ -30,4 +32,6 @@ export interface Ticket {
   updated: Date;
 
   resolution?: string;
+
+  comments: Comment[];
 }
