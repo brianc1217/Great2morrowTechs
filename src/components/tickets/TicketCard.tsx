@@ -49,25 +49,9 @@ export default function TicketCard({
       <div className="mt-6 flex gap-3">
         <button
           onClick={() => navigate(`/tickets/${ticket.id}`)}
-          className="rounded-lg border px-4 py-2 hover:bg-slate-100"
+          className="rounded-lg bg-slate-900 px-4 py-2 font-semibold text-white hover:bg-slate-800"
         >
-          View
-        </button>
-
-        <button
-          onClick={() => navigate(`/tickets/${ticket.id}`)}
-          className="rounded-lg border px-4 py-2 hover:bg-slate-100"
-        >
-          Edit
-        </button>
-
-        <button
-          onClick={() =>
-            navigate(`/tickets/${ticket.id}/resolve`)
-          }
-          className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
-        >
-          Resolve
+          Work Scenario
         </button>
       </div>
     </div>

@@ -19,27 +19,15 @@ export default function Sidebar() {
           Study Dashboard
         </NavLink>
 
-        <NavLink to="/training" className={linkClass}>
-          Training Tickets
-        </NavLink>
-
-        <NavLink to="/flashcards" className={linkClass}>
-          Flashcards
-        </NavLink>
-
-        <NavLink to="/study-plan" className={linkClass}>
-          Study Plan
+        <NavLink to="/tickets" className={linkClass}>
+          A+ Ticket Lab
         </NavLink>
 
         <NavLink to="/progress" className={linkClass}>
           My Progress
         </NavLink>
 
-        <p className="px-4 pt-5 text-xs font-semibold uppercase tracking-wide text-slate-500">Portfolio tools</p>
-
-        <NavLink to="/tickets" className={linkClass}>
-          Live Ticket Queue
-        </NavLink>
+        <p className="px-4 pt-5 text-xs font-semibold uppercase tracking-wide text-slate-500">Portfolio records</p>
 
         <NavLink to="/history" className={linkClass}>
           Ticket History

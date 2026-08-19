@@ -5,6 +5,8 @@ import { useTickets } from "../hooks/useTickets";
 
 import PageHeader from "../components/common/PageHeader";
 import TicketForm from "../components/tickets/TicketForm";
+import { ticketScenarios } from "../data/aPlusStudy";
+import { useStudyProgress } from "../hooks/useStudyProgress";
 
 import type { Ticket } from "../types/ticket";
 
@@ -20,12 +22,24 @@ export default function TicketDetails() {
   );
 
   const [comment, setComment] = useState("");
+  const [checks, setChecks] = useState<string[]>([]);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const { correctAnswers, markCorrect } = useStudyProgress();
 
   if (!ticket) {
     return <Navigate to="/tickets" replace />;
   }
 
   const currentTicket = ticket;
+  const scenario = ticketScenarios.find((item) => item.ticketId === currentTicket.id);
+  const solved = scenario ? correctAnswers.includes(`ticket-${scenario.ticketId}`) : false;
+  const answered = selectedAnswer !== null || solved;
+
+  function chooseAnswer(index: number) {
+    if (!scenario || answered) return;
+    setSelectedAnswer(index);
+    if (index === scenario.answer) markCorrect(`ticket-${scenario.ticketId}`);
+  }
 
   function handleSave(updatedTicket: Ticket) {
     updateTicket(updatedTicket);
@@ -53,16 +67,16 @@ export default function TicketDetails() {
     <div className="space-y-8">
       <PageHeader
         title={`Ticket #${currentTicket.id}`}
-        subtitle="Edit ticket information"
+        subtitle={scenario ? `${scenario.domain} hands-on A+ scenario` : "Edit ticket information"}
       />
 
-      <div className="rounded-xl border bg-white p-8 shadow-sm">
-        <TicketForm
-          initialTicket={currentTicket}
-          submitText="Save Changes"
-          onSubmit={handleSave}
-        />
-      </div>
+      {scenario ? <section className="rounded-xl border bg-white p-8 shadow-sm space-y-7">
+        <div><p className="text-sm font-bold text-blue-700">SCENARIO GOAL</p><h2 className="mt-2 text-2xl font-semibold">{scenario.goal}</h2><p className="mt-3 text-slate-600">Use the checklist like you would at a real help desk. Add your own notes below as you work.</p></div>
+        <div><h3 className="font-semibold">Investigation checklist</h3><div className="mt-3 space-y-3">{scenario.checks.map((check) => <label key={check} className="flex gap-3 rounded-lg bg-slate-50 p-4"><input type="checkbox" checked={checks.includes(check)} onChange={() => setChecks((current) => current.includes(check) ? current.filter((item) => item !== check) : [...current, check])} /><span>{check}</span></label>)}</div></div>
+        <div><h3 className="font-semibold">Your diagnosis</h3><p className="mt-1 text-slate-600">After working through the checks, choose the best next action.</p><p className="mt-4 text-lg font-semibold">{scenario.question}</p><div className="mt-4 space-y-3">{scenario.choices.map((choice, index) => { const state = answered ? index === scenario.answer ? "border-green-500 bg-green-50" : index === selectedAnswer ? "border-red-400 bg-red-50" : "border-slate-200" : "border-slate-200 hover:border-blue-400"; return <button key={choice} onClick={() => chooseAnswer(index)} className={`block w-full rounded-lg border p-4 text-left ${state}`}>{String.fromCharCode(65 + index)}. {choice}</button>; })}</div>
+          {answered && <div className={`mt-5 rounded-lg p-5 ${solved || selectedAnswer === scenario.answer ? "bg-green-50 text-green-950" : "bg-amber-50 text-amber-950"}`}><p className="font-bold">{solved || selectedAnswer === scenario.answer ? `Ticket resolved — +${scenario.points} XP earned.` : "That is not the best next action."}</p><p className="mt-1">{scenario.explanation}</p></div>}
+        </div>
+      </section> : <div className="rounded-xl border bg-white p-8 shadow-sm"><TicketForm initialTicket={currentTicket} submitText="Save Changes" onSubmit={handleSave} /></div>}
 
       <section className="rounded-xl border bg-white p-8 shadow-sm">
         <h2 className="text-2xl font-semibold">Comments</h2>
