@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import { useTickets } from "../../hooks/useTickets";
-
 import PriorityBadge from "../common/PriorityBadge";
 import StatusBadge from "../common/StatusBadge";
 
@@ -15,18 +13,6 @@ export default function TicketCard({
   ticket,
 }: TicketCardProps) {
   const navigate = useNavigate();
-
-  const { deleteTicket } = useTickets();
-
-  function handleDelete() {
-    const confirmed = window.confirm(
-      `Delete Ticket #${ticket.id}?\n\nThis cannot be undone.`
-    );
-
-    if (!confirmed) return;
-
-    deleteTicket(ticket.id);
-  }
 
   return (
     <div className="rounded-xl border bg-white p-6 shadow-sm transition hover:shadow-md">
@@ -76,10 +62,12 @@ export default function TicketCard({
         </button>
 
         <button
-          onClick={handleDelete}
-          className="rounded-lg bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+          onClick={() =>
+            navigate(`/tickets/${ticket.id}/resolve`)
+          }
+          className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
         >
-          Delete
+          Resolve
         </button>
       </div>
     </div>

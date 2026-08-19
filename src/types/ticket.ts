@@ -33,5 +33,13 @@ export interface Ticket {
 
   resolution?: string;
 
+  resolutionCategory?: string;
+
+  resolutionTimeMinutes?: number;
+
+  resolvedAt?: Date;
+
+  archivedAt?: Date;
+
   comments: Comment[];
 }

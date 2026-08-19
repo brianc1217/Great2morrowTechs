@@ -17,7 +17,6 @@ interface TicketContextType {
 
   updateTicket: (ticket: Ticket) => void;
 
-  deleteTicket: (id: number) => void;
 }
 
 const TicketContext =
@@ -43,6 +42,16 @@ export function TicketProvider({
       ...ticket,
       created: new Date(ticket.created),
       updated: new Date(ticket.updated),
+      resolvedAt: ticket.resolvedAt
+        ? new Date(ticket.resolvedAt)
+        : undefined,
+      archivedAt: ticket.archivedAt
+        ? new Date(ticket.archivedAt)
+        : undefined,
+      comments: (ticket.comments ?? []).map((comment) => ({
+        ...comment,
+        created: new Date(comment.created),
+      })),
     }));
   });
 
@@ -65,21 +74,12 @@ export function TicketProvider({
     );
   }
 
-  function deleteTicket(id: number) {
-    setTickets((previous) =>
-      previous.filter(
-        (ticket) => ticket.id !== id
-      )
-    );
-  }
-
   return (
     <TicketContext.Provider
       value={{
         tickets,
         addTicket,
         updateTicket,
-        deleteTicket,
       }}
     >
       {children}
@@ -87,6 +87,8 @@ export function TicketProvider({
   );
 }
 
+// This hook intentionally lives with its context provider.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTicketContext() {
   const context = useContext(TicketContext);
 

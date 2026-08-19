@@ -11,6 +11,8 @@ import Dashboard from "./pages/Dashboard";
 import Tickets from "./pages/Tickets";
 import NewTicket from "./pages/NewTicket";
 import TicketDetails from "./pages/TicketDetails";
+import ResolveTicket from "./pages/ResolveTicket";
+import TicketHistory from "./pages/TicketHistory";
 import Progress from "./pages/Progress";
 import Settings from "./pages/Settings";
 import ClockIn from "./pages/ClockIn";
@@ -90,20 +92,13 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              <Navigate
-                to="/dashboard"
-                replace
-              />
-            }
+            element={<Navigate to="/dashboard" replace />}
           />
 
           <Route
             path="/dashboard"
             element={
-              <Dashboard
-                technician={technician}
-              />
+              <Dashboard technician={technician} />
             }
           />
 
@@ -121,6 +116,13 @@ export default function App() {
             path="/tickets/:id"
             element={<TicketDetails />}
           />
+
+          <Route
+            path="/tickets/:id/resolve"
+            element={<ResolveTicket />}
+          />
+
+          <Route path="/history" element={<TicketHistory />} />
 
           <Route
             path="/progress"

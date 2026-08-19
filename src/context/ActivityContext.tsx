@@ -47,6 +47,8 @@ export function ActivityProvider({
   );
 }
 
+// This hook intentionally lives with its context provider.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useActivityContext() {
   const context = useContext(ActivityContext);
 

@@ -10,6 +10,7 @@ export const tickets: Ticket[] = [
     assignedTo: "Brian",
     created: new Date(),
     updated: new Date(),
+    comments: [],
   },
 
   {
@@ -21,6 +22,7 @@ export const tickets: Ticket[] = [
     assignedTo: "Brian",
     created: new Date(),
     updated: new Date(),
+    comments: [],
   },
 
   {
@@ -33,6 +35,11 @@ export const tickets: Ticket[] = [
     created: new Date(),
     updated: new Date(),
     resolution: "Password reset in Active Directory.",
+    resolvedAt: new Date(),
+    archivedAt: new Date(),
+    resolutionCategory: "Access",
+    resolutionTimeMinutes: 10,
+    comments: [],
   },
 
   {
@@ -44,5 +51,6 @@ export const tickets: Ticket[] = [
     assignedTo: "Brian",
     created: new Date(),
     updated: new Date(),
+    comments: [],
   },
 ];

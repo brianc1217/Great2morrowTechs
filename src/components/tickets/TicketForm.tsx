@@ -56,6 +56,13 @@ export default function TicketForm({
       updated: new Date(),
       resolution:
         initialTicket?.resolution,
+      resolutionCategory:
+        initialTicket?.resolutionCategory,
+      resolutionTimeMinutes:
+        initialTicket?.resolutionTimeMinutes,
+      resolvedAt: initialTicket?.resolvedAt,
+      archivedAt: initialTicket?.archivedAt,
+      comments: initialTicket?.comments ?? [],
     });
   }
 
