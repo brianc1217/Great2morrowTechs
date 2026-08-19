@@ -1,6 +1,6 @@
 interface StatCardProps {
   title: string;
-  value: number;
+  value: string | number;
   icon: string;
   color: string;
 }

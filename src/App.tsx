@@ -14,6 +14,11 @@ import TicketDetails from "./pages/TicketDetails";
 import ResolveTicket from "./pages/ResolveTicket";
 import TicketHistory from "./pages/TicketHistory";
 import Progress from "./pages/Progress";
+import StudyPlan from "./pages/StudyPlan";
+import Flashcards from "./pages/Flashcards";
+import PracticeQuestions from "./pages/PracticeQuestions";
+import TrainingTickets from "./pages/TrainingTickets";
+import TrainingTicketDetail from "./pages/TrainingTicketDetail";
 import Settings from "./pages/Settings";
 import ClockIn from "./pages/ClockIn";
 
@@ -128,6 +133,12 @@ export default function App() {
             path="/progress"
             element={<Progress />}
           />
+
+          <Route path="/study-plan" element={<StudyPlan />} />
+          <Route path="/flashcards" element={<Flashcards />} />
+          <Route path="/practice" element={<PracticeQuestions />} />
+          <Route path="/training" element={<TrainingTickets />} />
+          <Route path="/training/:id" element={<TrainingTicketDetail />} />
 
           <Route
             path="/settings"

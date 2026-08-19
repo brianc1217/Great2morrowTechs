@@ -1,9 +1,8 @@
-import type { Technician } from "../types/technician";
-
-import { useTickets } from "../hooks/useTickets";
-
 import PageHeader from "../components/common/PageHeader";
 import StatCard from "../components/dashboard/StatCard";
+import { studyTopics } from "../data/aPlusStudy";
+import { useStudyProgress } from "../hooks/useStudyProgress";
+import type { Technician } from "../types/technician";
 
 interface DashboardProps {
   technician: Technician;
@@ -12,82 +11,68 @@ interface DashboardProps {
 export default function Dashboard({
   technician,
 }: DashboardProps) {
-  const { tickets } = useTickets();
-
-  const open = tickets.filter(
-    (t) => t.status === "Open"
-  ).length;
-
-  const critical = tickets.filter(
-    (t) => t.priority === "Critical"
-  ).length;
-
-  const waiting = tickets.filter(
-    (t) => t.status === "Waiting"
-  ).length;
-
-  const resolved = tickets.filter(
-    (t) =>
-      t.status === "Resolved" ||
-      t.status === "Closed"
-  ).length;
+  const { completedTopics, correctAnswers } = useStudyProgress();
+  const nextTopic = studyTopics.find((topic) => !completedTopics.includes(topic.id)) ?? studyTopics[0];
+  const studyPercent = Math.round((completedTopics.length / studyTopics.length) * 100);
+  const xp = correctAnswers.length * 100;
+  const level = Math.floor(xp / 300) + 1;
 
   return (
     <div className="space-y-8">
       <PageHeader
-        title={`Welcome back, ${technician.name}`}
-        subtitle="Here's what's happening today."
+        title={`Ready to study, ${technician.name}?`}
+        subtitle="Work training tickets like a real help-desk technician and earn XP for correct resolutions."
       />
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          title="Open Tickets"
-          value={open}
-          icon="📂"
+          title="Topics Complete"
+          value={`${completedTopics.length}/${studyTopics.length}`}
+          icon="📚"
           color="bg-blue-100"
         />
 
         <StatCard
-          title="Critical"
-          value={critical}
-          icon="🔥"
-          color="bg-red-100"
+          title="Study Progress"
+          value={`${studyPercent}%`}
+          icon="🎯"
+          color="bg-purple-100"
         />
 
         <StatCard
-          title="Waiting"
-          value={waiting}
-          icon="⏳"
-          color="bg-yellow-100"
-        />
-
-        <StatCard
-          title="Resolved"
-          value={resolved}
-          icon="✅"
+          title="Experience"
+          value={`${xp} XP`}
+          icon="⚡"
           color="bg-green-100"
+        />
+
+        <StatCard
+          title="Current Level"
+          value={level}
+          icon="🏅"
+          color="bg-amber-100"
         />
       </div>
 
       <div className="rounded-xl border bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-2xl font-semibold">
-          Technician Summary
+          What to study next
         </h2>
 
         <div className="grid gap-4 md:grid-cols-3">
           <SummaryCard
-            title="Technician"
-            value={technician.name}
+            title="Topic"
+            value={nextTopic.title}
           />
 
           <SummaryCard
-            title="Level"
-            value={technician.level.toString()}
+            title="Focus"
+            value={nextTopic.domain}
           />
 
           <SummaryCard
-            title="XP"
-            value={technician.xp.toString()}
+          title="Your next move"
+          value="Work a training ticket"
           />
         </div>
       </div>
