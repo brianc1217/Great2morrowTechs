@@ -35,10 +35,6 @@ export default function Sidebar() {
           My Progress
         </NavLink>
 
-        <NavLink to="/flashcards" className={linkClass}>
-          Flashcards
-        </NavLink>
-
         <p className="px-4 pt-5 text-xs font-semibold uppercase tracking-wide text-slate-500">Portfolio tools</p>
 
         <NavLink to="/tickets" className={linkClass}>
