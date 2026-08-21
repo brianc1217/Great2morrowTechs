@@ -14,6 +14,7 @@ import TicketDetails from "./pages/TicketDetails";
 import ResolveTicket from "./pages/ResolveTicket";
 import TicketHistory from "./pages/TicketHistory";
 import Progress from "./pages/Progress";
+import HelpDeskReports from "./pages/HelpDeskReports";
 import StudyPlan from "./pages/StudyPlan";
 import Flashcards from "./pages/Flashcards";
 import PracticeQuestions from "./pages/PracticeQuestions";
@@ -131,13 +132,14 @@ export default function App() {
 
           <Route
             path="/progress"
-            element={<Progress />}
+            element={<HelpDeskReports />}
           />
 
           <Route path="/study-plan" element={<StudyPlan />} />
           <Route path="/flashcards" element={<Flashcards />} />
           <Route path="/practice" element={<PracticeQuestions />} />
           <Route path="/training" element={<TrainingTickets />} />
+          <Route path="/training/dashboard" element={<Progress />} />
           <Route path="/training/:id" element={<TrainingTicketDetail />} />
 
           <Route

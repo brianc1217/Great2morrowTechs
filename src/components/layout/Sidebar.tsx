@@ -39,6 +39,10 @@ export default function Sidebar() {
           Training Tickets
         </NavLink>
 
+        <NavLink to="/training/dashboard" className={linkClass}>
+          Training Dashboard
+        </NavLink>
+
         <NavLink to="/flashcards" className={linkClass}>
           Flashcards
         </NavLink>
