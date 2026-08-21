@@ -15,19 +15,41 @@ export default function Sidebar() {
       </h1>
 
       <nav className="space-y-2">
+        <p className="px-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Help Desk</p>
+
         <NavLink to="/dashboard" className={linkClass}>
-          Study Dashboard
+          Dashboard
         </NavLink>
 
         <NavLink to="/tickets" className={linkClass}>
-          A+ Ticket Lab
+          Ticket Queue
         </NavLink>
 
         <NavLink to="/progress" className={linkClass}>
-          My Progress
+          Reports
         </NavLink>
 
-        <p className="px-4 pt-5 text-xs font-semibold uppercase tracking-wide text-slate-500">Portfolio records</p>
+        <NavLink to="/settings" className={linkClass}>
+          Settings
+        </NavLink>
+
+        <p className="px-4 pt-5 text-xs font-semibold uppercase tracking-wide text-slate-500">Training Center</p>
+
+        <NavLink to="/training" className={linkClass}>
+          Training Tickets
+        </NavLink>
+
+        <NavLink to="/flashcards" className={linkClass}>
+          Flashcards
+        </NavLink>
+
+        <NavLink to="/practice" className={linkClass}>
+          Practice Questions
+        </NavLink>
+
+        <NavLink to="/study-plan" className={linkClass}>
+          Study Plan
+        </NavLink>
 
         <NavLink to="/history" className={linkClass}>
           Ticket History
