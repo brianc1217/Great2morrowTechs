@@ -1,4 +1,5 @@
 import type { Technician } from "../../types/technician";
+import { useStudyProgress } from "../../hooks/useStudyProgress";
 
 interface HeaderProps {
   technician: Technician;
@@ -9,6 +10,9 @@ export default function Header({
   technician,
   onClockOut,
 }: HeaderProps) {
+  const { correctAnswers } = useStudyProgress();
+  const xp = correctAnswers.length * 100;
+  const level = Math.floor(xp / 300) + 1;
   return (
     <header className="flex items-center justify-between border-b bg-white px-6 py-4 shadow-sm">
       <div>
@@ -26,7 +30,7 @@ export default function Header({
           <p className="font-semibold">{technician.name}</p>
 
           <p className="text-sm text-gray-500">
-            Level {technician.level} • {technician.xp} XP
+            Level {level} • {xp} XP
           </p>
         </div>
 
