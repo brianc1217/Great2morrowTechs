@@ -3,7 +3,6 @@ import { useState } from "react";
 import type {
   Ticket,
   TicketPriority,
-  TicketStatus,
 } from "../../types/ticket";
 
 interface TicketFormProps {
@@ -31,11 +30,6 @@ export default function TicketForm({
       initialTicket?.priority ?? "Medium"
     );
 
-  const [status, setStatus] =
-    useState<TicketStatus>(
-      initialTicket?.status ?? "Open"
-    );
-
   function handleSubmit(
     e: React.FormEvent
   ) {
@@ -48,9 +42,9 @@ export default function TicketForm({
       title,
       description,
       priority,
-      status,
+      status: initialTicket?.status ?? "New",
       assignedTo:
-        initialTicket?.assignedTo ?? "Brian",
+        initialTicket?.assignedTo ?? "Unassigned",
       created:
         initialTicket?.created ?? new Date(),
       updated: new Date(),
@@ -102,7 +96,7 @@ export default function TicketForm({
         />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div>
         <div>
           <label className="mb-2 block font-semibold">
             Priority
@@ -125,29 +119,6 @@ export default function TicketForm({
           </select>
         </div>
 
-        <div>
-          <label className="mb-2 block font-semibold">
-            Status
-          </label>
-
-          <select
-            className="w-full rounded-lg border p-3"
-            value={status}
-            onChange={(e) =>
-              setStatus(
-                e.target
-                  .value as TicketStatus
-              )
-            }
-          >
-            <option>Open</option>
-            <option>Assigned</option>
-            <option>In Progress</option>
-            <option>Waiting</option>
-            <option>Resolved</option>
-            <option>Closed</option>
-          </select>
-        </div>
       </div>
 
       <button

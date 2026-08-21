@@ -51,7 +51,7 @@ export default function TicketCard({
           onClick={() => navigate(`/tickets/${ticket.id}`)}
           className="rounded-lg bg-slate-900 px-4 py-2 font-semibold text-white hover:bg-slate-800"
         >
-          Work Scenario
+          View Ticket
         </button>
       </div>
     </div>

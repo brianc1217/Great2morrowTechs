@@ -1,7 +1,7 @@
 import type { Ticket } from "../types/ticket";
 
 export function getOpenTickets(tickets: Ticket[]) {
-  return tickets.filter((t) => t.status === "Open").length;
+  return tickets.filter((t) => t.status === "New").length;
 }
 
 export function getInProgressTickets(tickets: Ticket[]) {
@@ -9,7 +9,7 @@ export function getInProgressTickets(tickets: Ticket[]) {
 }
 
 export function getWaitingTickets(tickets: Ticket[]) {
-  return tickets.filter((t) => t.status === "Waiting").length;
+  return tickets.filter((t) => t.status === "Waiting on User").length;
 }
 
 export function getClosedTickets(tickets: Ticket[]) {

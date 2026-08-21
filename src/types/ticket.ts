@@ -7,10 +7,10 @@ export type TicketPriority =
   | "Critical";
 
 export type TicketStatus =
-  | "Open"
+  | "New"
   | "Assigned"
   | "In Progress"
-  | "Waiting"
+  | "Waiting on User"
   | "Resolved"
   | "Closed";
 

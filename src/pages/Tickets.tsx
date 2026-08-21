@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useTickets } from "../hooks/useTickets";
 
@@ -7,6 +8,7 @@ import TicketCard from "../components/tickets/TicketCard";
 
 export default function Tickets() {
   const { tickets } = useTickets();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const activeTickets = useMemo(() => tickets.filter((ticket) => !ticket.archivedAt), [tickets]);
   const visibleTickets = useMemo(() => {
@@ -18,13 +20,15 @@ export default function Tickets() {
   return (
     <div className="space-y-8">
       <PageHeader
-        title="A+ Hands-On Ticket Lab"
-        subtitle={`Work ${activeTickets.length} support scenarios like a help-desk technician.`}
+        title="Ticket Queue"
+        subtitle={`${activeTickets.length} active tickets`}
+        actionText="+ Create Ticket"
+        onAction={() => navigate("/tickets/new")}
       />
 
       <div>
         <label className="sr-only" htmlFor="ticket-search">Search active tickets</label>
-        <input id="ticket-search" value={query} onChange={(event) => setQuery(event.target.value)} className="w-full rounded-lg border bg-white p-3" placeholder="Search a scenario by ticket number, issue, or priority" />
+        <input id="ticket-search" value={query} onChange={(event) => setQuery(event.target.value)} className="w-full rounded-lg border bg-white p-3" placeholder="Search by ticket number, title, description, technician, status, or priority" />
       </div>
 
       <div className="grid gap-6">

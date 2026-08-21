@@ -36,10 +36,11 @@ export function TicketProvider({
       return initialTickets;
     }
 
-    const parsed: Ticket[] = JSON.parse(saved);
+    const parsed: Array<Omit<Ticket, "status"> & { status: string }> = JSON.parse(saved);
 
     return parsed.map((ticket) => ({
       ...ticket,
+      status: ticket.status === "Open" ? "New" : ticket.status === "Waiting" ? "Waiting on User" : ticket.status as Ticket["status"],
       created: new Date(ticket.created),
       updated: new Date(ticket.updated),
       resolvedAt: ticket.resolvedAt

@@ -37,12 +37,12 @@ export default function TicketFilters({
         >
           <option value="">All Statuses</option>
 
-          <option value={"Open" satisfies TicketStatus}>Open</option>
+          <option value={"New" satisfies TicketStatus}>New</option>
           <option value={"Assigned" satisfies TicketStatus}>Assigned</option>
           <option value={"In Progress" satisfies TicketStatus}>
             In Progress
           </option>
-          <option value={"Waiting" satisfies TicketStatus}>Waiting</option>
+          <option value={"Waiting on User" satisfies TicketStatus}>Waiting on User</option>
           <option value={"Resolved" satisfies TicketStatus}>Resolved</option>
           <option value={"Closed" satisfies TicketStatus}>Closed</option>
         </select>
