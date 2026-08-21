@@ -22,7 +22,7 @@ interface TicketContextType {
 const TicketContext =
   createContext<TicketContextType | null>(null);
 
-const STORAGE_KEY = "g2t-aplus-ticket-lab-v2";
+const STORAGE_KEY = "g2t-helpdesk-tickets-v1";
 
 export function TicketProvider({
   children,
