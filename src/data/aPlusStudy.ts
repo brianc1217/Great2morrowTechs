@@ -28,6 +28,10 @@ export interface TrainingScenario extends PracticeQuestion {
   requester: string;
   urgency: "Low" | "Medium" | "High";
   points: number;
+  problem: string;
+  symptoms: string;
+  environment: string;
+  objective: string;
 }
 
 export interface TicketScenario {
@@ -102,6 +106,10 @@ export const trainingScenarios: TrainingScenario[] = practiceQuestions.map((ques
   requester: ["Alex Morgan", "Jamie Lee", "Taylor Reed", "Casey Jordan", "Morgan Patel"][index],
   urgency: index === 2 ? "High" : index === 0 || index === 3 ? "Medium" : "Low",
   points: 100,
+  problem: question.question,
+  symptoms: "The user reports the issue and needs service restored.",
+  environment: "Managed Windows workstation on the company network.",
+  objective: `CompTIA A+ · ${question.domain}`,
 }));
 
 export const ticketScenarios: TicketScenario[] = [
